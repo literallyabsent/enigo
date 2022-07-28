@@ -117,6 +117,7 @@ fn tokenize(input: &str) -> Result<Vec<Token>, ParseError> {
                         }
                     }
                     match &*tag {
+                        // hold keys
                         "+UNICODE" => unicode = true,
                         "-UNICODE" => unicode = false,
                         "+SHIFT" => tokens.push(Token::KeyDown(Key::Shift)),
@@ -127,6 +128,8 @@ fn tokenize(input: &str) -> Result<Vec<Token>, ParseError> {
                         "-META" => tokens.push(Token::KeyUp(Key::Meta)),
                         "+ALT" => tokens.push(Token::KeyDown(Key::Alt)),
                         "-ALT" => tokens.push(Token::KeyUp(Key::Alt)),
+                        "+TAB" => tokens.push(Token::KeyDown(Key::Tab)),
+                        "-TAB" => tokens.push(Token::KeyUp(Key::Tab)),
                         _ => return Err(ParseError::UnknownTag(tag)),
                     }
                 }
