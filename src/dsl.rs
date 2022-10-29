@@ -56,6 +56,7 @@ where
             Token::Unicode(buffer) => enigo.key_sequence(&buffer),
             Token::KeyUp(key) => enigo.key_up(key),
             Token::KeyDown(key) => enigo.key_down(key),
+            Token::KeyClick(key) => enigo.key_click(key),
         }
     }
     Ok(())
@@ -67,6 +68,7 @@ enum Token {
     Unicode(String),
     KeyUp(Key),
     KeyDown(Key),
+    KeyClick(Key),
 }
 
 fn tokenize(input: &str) -> Result<Vec<Token>, ParseError> {
@@ -188,6 +190,40 @@ fn tokenize(input: &str) -> Result<Vec<Token>, ParseError> {
                         "-RIGHTARROW" => tokens.push(Token::KeyUp(Key::RightArrow)),
                         "+UPARROW" => tokens.push(Token::KeyDown(Key::UpArrow)),
                         "-UPARROW" => tokens.push(Token::KeyUp(Key::UpArrow)),
+                        // KeyClick
+                        ".SHIFT" => tokens.push(Token::KeyClick(Key::Shift)),
+                        ".CTRL" => tokens.push(Token::KeyClick(Key::Control)),
+                        ".META" => tokens.push(Token::KeyClick(Key::Meta)),
+                        ".ALT" => tokens.push(Token::KeyClick(Key::Alt)),
+                        ".TAB" => tokens.push(Token::KeyClick(Key::Tab)),
+                        ".BACKSPACE" => tokens.push(Token::KeyClick(Key::Backspace)),
+                        ".CAPSLOCK" => tokens.push(Token::KeyClick(Key::CapsLock)),
+                        ".CONTROL" => tokens.push(Token::KeyClick(Key::Control)),
+                        ".DELETE" => tokens.push(Token::KeyClick(Key::Delete)),
+                        ".DEL" => tokens.push(Token::KeyClick(Key::Delete)),
+                        ".END" => tokens.push(Token::KeyClick(Key::End)),
+                        ".ESCAPE" => tokens.push(Token::KeyClick(Key::Escape)),
+                        ".F1" => tokens.push(Token::KeyClick(Key::F1)),
+                        ".F2" => tokens.push(Token::KeyClick(Key::F2)),
+                        ".F3" => tokens.push(Token::KeyClick(Key::F3)),
+                        ".F4" => tokens.push(Token::KeyClick(Key::F4)),
+                        ".F5" => tokens.push(Token::KeyClick(Key::F5)),
+                        ".F6" => tokens.push(Token::KeyClick(Key::F6)),
+                        ".F7" => tokens.push(Token::KeyClick(Key::F7)),
+                        ".F8" => tokens.push(Token::KeyClick(Key::F8)),
+                        ".F9" => tokens.push(Token::KeyClick(Key::F9)),
+                        ".F10" => tokens.push(Token::KeyClick(Key::F10)),
+                        ".F11" => tokens.push(Token::KeyClick(Key::F11)),
+                        ".F12" => tokens.push(Token::KeyClick(Key::F12)),
+                        ".HOME" => tokens.push(Token::KeyClick(Key::Home)),
+                        ".OPTION" => tokens.push(Token::KeyClick(Key::Option)),
+                        ".PAGEDOWN" => tokens.push(Token::KeyClick(Key::PageDown)),
+                        ".PAGEUP" => tokens.push(Token::KeyClick(Key::PageUp)),
+                        ".RETURN" => tokens.push(Token::KeyClick(Key::Return)),
+                        ".LEFTARROW" => tokens.push(Token::KeyClick(Key::LeftArrow)),
+                        ".DOWNARROW" => tokens.push(Token::KeyClick(Key::DownArrow)),
+                        ".RIGHTARROW" => tokens.push(Token::KeyClick(Key::RightArrow)),
+                        ".UPARROW" => tokens.push(Token::KeyClick(Key::UpArrow)),
                         _ => return Err(ParseError::UnknownTag(tag)),
                     }
                 }
